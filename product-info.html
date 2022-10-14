@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
 
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -13,43 +17,122 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link" id = "usuariologeado" href="login.html">Login </a>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+          <li><a class="dropdown-item" href="my-profile.html">Perfil</a></li>
+          <li><a class="dropdown-item" id="logoutbutton" href="login.html">Cerrar sesión</a></li>
         </ul>
       </div>
-    </div>
+      </li>
+    </ul>
+  </div>
+</div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <main role="main">
+    <div class="container mt-5">
+      <div class="text-center p-4">
+        <h2>Descripción del producto</h2>
       </div>
+      <h3 id="productName"></h3>
+      <hr class="my-3">
+      <section id="product-info-section">
+        <dl>
+          <dt>Precio</dt>
+          <dd>
+            <p id="productCost"></p>
+          </dd>
+
+          <dt>Descripción</dt>
+          <dd>
+            <p id="productDescription"></p>
+          </dd>
+
+          <dt>Categoria</dt>
+          <dd>
+            <p id="productCategory"></p>
+          </dd>
+
+          <dt>Cantidad de vendidos</dt>
+          <dd>
+            <p id="productSoldCount"></p>
+          </dd>
+
+          <dt>Imágenes ilustrativas</dt>
+          <dd>
+            <p class ="row" id="ImagenInfo"></p>
+          </dd>
+          
+          <dt>Comentarios</dt>
+          <dd>
+            <p id="Comentarios"></p>
+          </dd>
+
+        </dl>
+      </section>
+      <b>Productos relacionados</b>
+      <div class="row text-center text-lg-left pt-2" id="relatedProductsGallery">
+        <div class="col-md-3"><img class="img-thumbnail" src="" id="img1"></div> 
+        <div class="col-md-3"><img class="img-thumbnail" src="" id="img2"></div> 
+      </div>
+      <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
+
+      <form class="needs-validation" id="comment-form">
+        <h2>Publica tu comentario</h2>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="user-name">Nombre</label>
+            <input type="text" class="form-control" name="user-name" placeholder="" value="">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <label for="comment-content">Contenido</label>
+            <textarea class="form-control" name="comment-content" rows="3"></textarea>
+          </div>
+        </div>
+
+        <p id="user-stars-title">Puntaje</p>
+        <div id="user-review-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+
+        <hr class="mb-4">
+        <button class="btn btn-primary" type="submit">Publicar</button>
+      </form>
+
+      <div class="row" id="comments-container">
+        <h2>Comentarios</h2>
+        <div class="list-group" id="comment-list">
+
+        </div>
+      </div>
+
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
-      <p class="float-end">
+      <p class="float-right">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
@@ -61,9 +144,9 @@
       <div></div>
     </div>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

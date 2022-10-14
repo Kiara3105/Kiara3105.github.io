@@ -30,20 +30,15 @@
        <br><br>
        <label for="Contraseña">Contraseña</label>
        <br><br>
-       <input type="text" placeholder="Contraseña" id="contraseña">
+       <input type="password" placeholder="Contraseña" id="contraseña">
        <br><br>
        <a class="w-10 btn btn-lg btn-primary" type="button" id="regBtn" form="register-form" onclick="ok()">Ingresar</a>
-       <br><br>
-      <div id="GoogleLogin">
-    <a href='".$client->createAuthUrl()."'id="rutina">Google Login</a>
-    </div>
       </div>
     </div>
     </div>
-
-  </form>
+   </form>
   </main>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+   <script src="https://accounts.google.com/gsi/client" async defer></script>
    <div id="g_id_onload"
    data-client_id="771411718431-8qk85jc3piq94uelg6jk52bj8urbto4j.apps.googleusercontent.com"
    data-callback="handleCredentialResponse">
@@ -51,7 +46,7 @@
   <div class="g_id_signin" data-type="standard"></div>
   <script>
     function handleCredentialResponse(usuarioGoogle){
-      window.location.href = 'index.html';
+      window.location.href = 'index.html'; 
     }
   </script>
   <footer class="text-muted">
