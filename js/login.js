@@ -1,11 +1,12 @@
 function ok(){
-  var email=document.getElementById("email").value;
-  var contraseña=document.getElementById("contraseña").value;
-  if(email=="1234.hola" && contraseña=="1234"){
+   Email=document.getElementById("email").value;
+   Contraseña=document.getElementById("contraseña").value;
+  if(Email.length >0 && Contraseña.length >0){
     alert("Usted ha ingresado correctamente")
+    localStorage.setItem('userLog', Email)
     window.location="index.html"
-    
-  }else{
-    alert("Datos incorrectos")
+     }else{
+    alert("Error de sesión")
   }
 }
+ 
